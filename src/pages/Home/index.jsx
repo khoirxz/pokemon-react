@@ -40,7 +40,7 @@ const Home = () => {
         {pokelist.map((item, i) => (
           <div
             key={i}
-            className="cursor-pointer p-3 rounded-md hover:bg-gray-200 transition-all ease-in"
+            className="cursor-pointer p-3 rounded-md hover:bg-gray-200 hover:text-black transition-all ease-in"
           >
             <Link to={`/pokemon/${item.id}`}>
               <div>

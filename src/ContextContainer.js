@@ -9,6 +9,8 @@ export const DataProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [pokelist, setPokelist] = useState([]);
   const [dataPoke, setDataPoke] = useState("");
+  const [stats, setStats] = useState([]);
+  const [label, setLabel] = useState([]);
 
   const fetchData = async () => {
     setLoading(true);
@@ -51,10 +53,14 @@ export const DataProvider = ({ children }) => {
   };
 
   const fethData = async (id) => {
+    setLoading(true);
     try {
       const response = await axios.get(baseUri + "/pokemon/" + id);
 
       setDataPoke(response.data);
+      setStats(response.data.stats.map((item) => item.base_stat));
+      setLabel(response.data.stats.map((item) => item.stat.name));
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -73,6 +79,8 @@ export const DataProvider = ({ children }) => {
         fetchMore,
         fethData,
         dataPoke,
+        stats,
+        label,
       }}
     >
       {children}
